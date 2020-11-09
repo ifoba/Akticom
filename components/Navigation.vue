@@ -3,16 +3,22 @@
     <div class="nav-logo">
       <img class="nav-logo-img" src="@/assets/img/logo.png" />
     </div>
-    <div class="nav-info"> News Portal </div>
-    <a-menu mode="horizontal">
-      <a-menu-item key="home"> <a-icon type="home" />Home</a-menu-item>
-      <a-menu-item key="read"> <a-icon type="read" />News</a-menu-item>
+    <a-menu  mode="horizontal">
+      <a-menu-item key="home"
+        ><nuxt-link no-prefetch to="/"> <a-icon type="home" />Home</nuxt-link></a-menu-item
+      >
+      <a-menu-item key="news"
+        ><nuxt-link no-prefetch to="/news">
+          <a-icon type="read" />News</nuxt-link
+        ></a-menu-item
+      >
     </a-menu>
   </nav>
 </template>
 
 <script>
-export default {};
+export default {
+};
 </script>
 
 <style lang="scss" scoped>
