@@ -13,7 +13,7 @@
       :default-current="paginationNumber"
       :total="news.length"
       @change="onChange"
-      simple 
+      simple
     />
   </div>
 </template>
@@ -46,15 +46,15 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.news-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
-}
-.pagination {
-  margin-top: 10px
+  .news-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+  }
+  .pagination {
+    margin-top: 10px;
+  }
 }
 </style>

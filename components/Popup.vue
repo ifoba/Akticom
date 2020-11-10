@@ -1,8 +1,9 @@
 <template>
   <div>
     <a-drawer
+      class="popup"
       title="Get offer"
-      :width="720"
+      :width="320"
       :visible="visible"
       :body-style="{ paddingBottom: '80px' }"
       @close="onClose"

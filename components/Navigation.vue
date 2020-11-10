@@ -1,11 +1,15 @@
 <template>
   <nav>
     <div class="nav-logo">
-      <img class="nav-logo-img" src="@/assets/img/logo.png" />
+      <nuxt-link no-prefetch to="/">
+        <img class="nav-logo-img" src="@/assets/img/logo.png" />
+      </nuxt-link>
     </div>
-    <a-menu  mode="horizontal">
+    <a-menu mode="horizontal">
       <a-menu-item key="home"
-        ><nuxt-link no-prefetch to="/"> <a-icon type="home" />Home</nuxt-link></a-menu-item
+        ><nuxt-link no-prefetch to="/">
+          <a-icon type="home" />Home</nuxt-link
+        ></a-menu-item
       >
       <a-menu-item key="news"
         ><nuxt-link no-prefetch to="/news">
@@ -17,8 +21,7 @@
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

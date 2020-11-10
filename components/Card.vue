@@ -1,6 +1,6 @@
 <template>
   <div class="news">
-    <a-card class="news-card" :title=" transformText(count.title)">
+    <a-card class="news-card" :title="transformText(count.title)">
       <a slot="extra" href="#" @click.prevent="openNews(count.id)">See more</a>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
@@ -30,10 +30,10 @@ export default {
       const res = txt
         .split("")
         .map((el, i) => {
-          return (i === 0) ? el.toUpperCase() : el;
+          return i === 0 ? el.toUpperCase() : el;
         })
         .join("");
-        return res
+      return res;
     }
   }
 };
@@ -45,8 +45,8 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-}
-.news-card {
-  width: 90%;
+  .news-card {
+    width: 90%;
+  }
 }
 </style>

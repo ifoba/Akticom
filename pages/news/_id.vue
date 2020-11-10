@@ -3,7 +3,7 @@
     <a-card style="width: 80%">
       <h2>{{ transformText(data.title) }}</h2>
       <div>
-        <!-- <img :src="photo.urls.small" /> -->
+        <img :src="photo.urls.small" />
         <h4>{{ transformText(data.body) }}</h4>
       </div>
       <p>
@@ -31,19 +31,26 @@
 import { mapActions } from "vuex";
 export default {
   validate({ params, store }) {
-    return 0 < params.id < store.getters["news/news"].length;
+    const newsCount = 100;
+    return 0 < params.id < newsCount;
   },
   async asyncData({ $axios, params }) {
-    const data = await $axios.$get(
-      `https://jsonplaceholder.typicode.com/posts/${params.id}`
-    );
-    const photo = await $axios.$get(
-      `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&client_id=a9pMFmJ7RZZbmqBQlL-VicCm9qIDYkTikfvdORyBikQ`
-    );
-    return { data };
+    const data = await $axios
+      .$get(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
+      .catch(e => {
+        console.log(e);
+      });
+    const photo = await $axios
+      .$get(
+        `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&client_id=a9pMFmJ7RZZbmqBQlL-VicCm9qIDYkTikfvdORyBikQ`
+      )
+      .catch(e => {
+        console.log(e, "Закончились запросы у Unsplash");
+      });
+    return { data, photo };
   },
   methods: {
-    ...mapActions({changePopupVisibility:"news/changePopupVisibility"}),
+    ...mapActions({ changePopupVisibility: "news/changePopupVisibility" }),
     showPopup() {
       this.changePopupVisibility(true);
     },
@@ -65,5 +72,10 @@ export default {
   display: flex;
   justify-content: center;
   padding-top: 10px;
+}
+@media screen and (max-width: 500px) {
+  img {
+    max-width: 210px;
+  }
 }
 </style>
