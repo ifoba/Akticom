@@ -37,9 +37,9 @@ export default {
     const data = await $axios.$get(
       `https://jsonplaceholder.typicode.com/posts/${params.id}`
     );
-    /* const photo = await $axios.$get(
+    const photo = await $axios.$get(
       `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&client_id=a9pMFmJ7RZZbmqBQlL-VicCm9qIDYkTikfvdORyBikQ`
-    ); */
+    );
     return { data };
   },
   methods: {

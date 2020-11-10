@@ -60,7 +60,7 @@
         <a-button class="close-btn" @click="onClose">
           Cancel
         </a-button>
-        <a-button type="primary" @click="onClose">
+        <a-button type="primary" @click="onSubmit">
           Submit
         </a-button>
       </div>
@@ -78,12 +78,23 @@ export default {
   },
   computed: {
     ...mapGetters({
-      visible: "news/popup"
+      visible: "news/popup",
+      paginationClickedCounter: "news/paginationClickedCounter"
     })
   },
   methods: {
     ...mapActions({ changePopupVisibility: "news/changePopupVisibility" }),
     onClose() {
+      this.changePopupVisibility(false);
+    },
+    onSubmit() {
+      const data = JSON.stringify({
+        name: this.form.getFieldValue("name"),
+        email: this.form.getFieldValue("email"),
+        phone: this.form.getFieldValue("phone"),
+        paginationCounter: this.paginationClickedCounter
+      });
+      console.log(data);
       this.changePopupVisibility(false);
     }
   }
