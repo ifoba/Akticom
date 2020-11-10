@@ -1,7 +1,8 @@
 export const state = () => ({
   news: [],
   paginationNumber: 1,
-  paginationClickedCounter: 0
+  paginationClickedCounter: 0,
+  popup: false
 });
 
 export const mutations = {
@@ -12,7 +13,10 @@ export const mutations = {
     state.paginationNumber = paginationNumber;
   },
   setPaginationClickedCounter(state) {
-    state.paginationClickedCounter = state.paginationClickedCounter  + 1;
+    state.paginationClickedCounter = state.paginationClickedCounter + 1;
+  },
+  setPopup(state, visibility) {
+    state.popup = visibility;
   }
 };
 
@@ -23,16 +27,20 @@ export const actions = {
     );
     commit("setNews", news);
   },
-  changePaginationNumber({commit}, x){
-    commit('setPaginationNumber', x)
+  changePaginationNumber({ commit }, num) {
+    commit("setPaginationNumber", num);
   },
   paginationClicked({ commit }) {
     commit("setPaginationClickedCounter");
   },
+  changePopupVisibility({ commit }, visibility) {
+    commit("setPopup", visibility);
+  }
 };
 
 export const getters = {
   news: state => state.news,
   paginationNumber: state => state.paginationNumber,
-  paginationClickedCounter: state => state.paginationClickedCounter
+  paginationClickedCounter: state => state.paginationClickedCounter,
+  popup: state => state.popup
 };

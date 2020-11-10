@@ -13,6 +13,7 @@
       :default-current="paginationNumber"
       :total="news.length"
       @change="onChange"
+      simple 
     />
   </div>
 </template>

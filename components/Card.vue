@@ -1,6 +1,6 @@
 <template>
   <div class="news">
-    <a-card class="news-card" :title="count.title">
+    <a-card class="news-card" :title=" transformText(count.title)">
       <a slot="extra" href="#" @click.prevent="openNews(count.id)">See more</a>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
@@ -23,9 +23,18 @@
 export default {
   props: ["count"],
   methods: {
-      openNews(id) {
+    openNews(id) {
       this.$router.push(`/news/${id}`);
     },
+    transformText(txt) {
+      const res = txt
+        .split("")
+        .map((el, i) => {
+          return (i === 0) ? el.toUpperCase() : el;
+        })
+        .join("");
+        return res
+    }
   }
 };
 </script>
@@ -38,6 +47,6 @@ export default {
   width: 100%;
 }
 .news-card {
-    width: 90%;
+  width: 90%;
 }
 </style>

@@ -1,12 +1,11 @@
 <template>
   <div class="news-more-info">
     <a-card style="width: 80%">
-      <img
-      :src="photo.urls.small"
-    />
-      <h2>{{ data.title }}</h2>
-      <!-- <img :src="photo.urls.small" /> -->
-      <h4>{{ data.body }}</h4>
+      <h2>{{ transformText(data.title) }}</h2>
+      <div>
+        <!-- <img :src="photo.urls.small" /> -->
+        <h4>{{ transformText(data.body) }}</h4>
+      </div>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
         quae doloribus error voluptates eum, placeat quos mollitia aperiam
@@ -20,26 +19,43 @@
         impedit placeat hic optio voluptatem voluptatibus numquam natus eos
         doloribus suscipit dolor, sunt sint vel est. Quibusdam, cumque?
       </p>
-      <a-button type="default">
-        Buy News
+      <a-button type="default" @click="showPopup">
+        Get offer
       </a-button>
     </a-card>
+    <Popup />
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  validate({ params }) {
-    return params.id > 0;
+  validate({ params, store }) {
+    return 0 < params.id < store.getters["news/news"].length;
   },
   async asyncData({ $axios, params }) {
     const data = await $axios.$get(
       `https://jsonplaceholder.typicode.com/posts/${params.id}`
     );
-    const photo = await $axios.$get(
+    /* const photo = await $axios.$get(
       `https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&client_id=a9pMFmJ7RZZbmqBQlL-VicCm9qIDYkTikfvdORyBikQ`
-    );
-    return { data, photo };
+    ); */
+    return { data };
+  },
+  methods: {
+    ...mapActions({changePopupVisibility:"news/changePopupVisibility"}),
+    showPopup() {
+      this.changePopupVisibility(true);
+    },
+    transformText(txt) {
+      const res = txt
+        .split("")
+        .map((el, i) => {
+          return i === 0 ? el.toUpperCase() : el;
+        })
+        .join("");
+      return res;
+    }
   }
 };
 </script>
